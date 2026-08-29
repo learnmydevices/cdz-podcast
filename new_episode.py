@@ -38,6 +38,7 @@ HERE = Path(__file__).resolve().parent
 FEED = HERE / "feed.xml"
 CONFIG = HERE / "config.json"
 MARKER = "<!-- EPISODES:NEWEST-FIRST -->"
+OP3_PREFIX = "https://op3.dev/e/"
 
 
 def die(msg: str) -> None:
@@ -115,9 +116,12 @@ def main() -> None:
     feed_text = feed_text.replace("https://MEDIA-BASE-PLACEHOLDER", cfg["media_base_url"])
 
     remote_name = args.remote_name or slugify(mp3.name)
-    enclosure_url = cfg["media_base_url"] + "/" + urllib.parse.quote(remote_name)
-    if enclosure_url in feed_text:
-        die(f"The feed already has an episode at {enclosure_url}. "
+    media_url = cfg["media_base_url"] + "/" + urllib.parse.quote(remote_name)
+    # OP3 download analytics: the prefix wraps the real URL. Listeners are
+    # redirected to the same file; OP3 counts the request on the way through.
+    enclosure_url = OP3_PREFIX + media_url.split("://", 1)[1]
+    if media_url in feed_text:
+        die(f"The feed already has an episode at {media_url}. "
             f"Use --remote-name to give this file a different name.")
 
     size_bytes = mp3.stat().st_size
@@ -158,7 +162,8 @@ def main() -> None:
     print()
     print("Before you git push, make sure this file is uploaded to R2 with EXACTLY this name:")
     print(f"  {remote_name}")
-    print(f"  (it will be served at {enclosure_url})")
+    print(f"  (it will be served at {media_url})")
+    print(f"  Download counting via OP3 is on.")
     if remote_name != mp3.name:
         print(f"  Tip: rename on upload, or run:  cp \"{mp3}\" ~/Desktop/{remote_name}")
 
