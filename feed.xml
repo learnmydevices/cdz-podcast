@@ -5,8 +5,8 @@
      xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cinema-ye Do Zabaane (Bilingual Cinema)</title>
-    <link>https://SITE-URL-PLACEHOLDER</link>
-    <atom:link href="https://SITE-URL-PLACEHOLDER/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://cdz-podcast.pages.dev</link>
+    <atom:link href="https://cdz-podcast.pages.dev/feed.xml" rel="self" type="application/rss+xml"/>
     <language>en</language>
     <copyright>&#169; Sohrab Amidi</copyright>
     <description>Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time. &#1605;&#1585;&#1608;&#1585; &#1705;&#1608;&#1578;&#1575;&#1607; &#1601;&#1740;&#1604;&#1605;&#8204;&#1607;&#1575; &#1576;&#1607; &#1583;&#1608; &#1586;&#1576;&#1575;&#1606; &#1575;&#1606;&#1711;&#1604;&#1740;&#1587;&#1740; &#1608; &#1601;&#1575;&#1585;&#1587;&#1740;.</description>
@@ -18,16 +18,26 @@
     </itunes:owner>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
-    <itunes:image href="https://MEDIA-BASE-PLACEHOLDER/cover.jpg"/>
+    <itunes:image href="https://pub-da751ee904b24db7820f2d5b3d23eeb9.r2.dev/cover.jpg"/>
     <image>
-      <url>https://MEDIA-BASE-PLACEHOLDER/cover.jpg</url>
+      <url>https://pub-da751ee904b24db7820f2d5b3d23eeb9.r2.dev/cover.jpg</url>
       <title>Cinema-ye Do Zabaane (Bilingual Cinema)</title>
-      <link>https://SITE-URL-PLACEHOLDER</link>
+      <link>https://cdz-podcast.pages.dev</link>
     </image>
     <itunes:category text="TV &amp; Film">
       <itunes:category text="Film Reviews"/>
     </itunes:category>
     <itunes:category text="Society &amp; Culture"/>
     <!-- EPISODES:NEWEST-FIRST -->
+    <item>
+      <title>Children of Heaven Review – Cinema-ye do zabaane | English &amp; Farsi Podcast</title>
+      <description>For the first episode of Cinema-ye Do Zabaane, a film made for this format: Children of Heaven (1997), Majid Majidi's story of two siblings sharing one pair of shoes, and the first Iranian film nominated for an Academy Award. Review in English first, then in Farsi. Short, simple, and an easy verdict this time: loved it. قسمت اول: بچه‌های آسمان ساخته مجید مجیدی. مرور کوتاه به دو زبان.</description>
+      <enclosure url="https://pub-da751ee904b24db7820f2d5b3d23eeb9.r2.dev/children-of-heaven.mp3" length="8509648" type="audio/mpeg"/>
+      <guid isPermaLink="false">https://pub-da751ee904b24db7820f2d5b3d23eeb9.r2.dev/children-of-heaven.mp3</guid>
+      <pubDate>Sat, 29 Aug 2026 16:17:36 +0000</pubDate>
+      <itunes:duration>3:33</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
   </channel>
 </rss>
