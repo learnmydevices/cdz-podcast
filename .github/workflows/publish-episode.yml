@@ -1,0 +1,85 @@
+name: Publish episode
+
+on:
+  workflow_dispatch:
+    inputs:
+      filename:
+        description: 'MP3 filename exactly as uploaded to R2 (e.g. episode-2.mp3)'
+        required: true
+        type: string
+      title:
+        description: 'Episode title as it should appear in podcast apps'
+        required: true
+        type: string
+      notes:
+        description: 'Show notes (a few sentences)'
+        required: true
+        type: string
+      episode_number:
+        description: 'Episode number (leave blank to auto-number)'
+        required: false
+        type: string
+      publish_date:
+        description: 'Publish date YYYY-MM-DD (leave blank for today)'
+        required: false
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Install ffmpeg (for reading audio duration)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Fetch the episode from R2
+        env:
+          FILENAME: ${{ inputs.filename }}
+        run: |
+          set -euo pipefail
+          MEDIA_BASE=$(python3 -c "import json,re; u=json.load(open('config.json'))['media_base_url']; print('https://'+re.sub(r'^https?://','',u).rstrip('/'))")
+          echo "Downloading $FILENAME from $MEDIA_BASE"
+          curl -fsSL --retry 3 -o "$FILENAME" "$MEDIA_BASE/$FILENAME" || {
+            echo "::error::Could not download $FILENAME. Upload it to the R2 bucket first, and check the spelling."
+            exit 1
+          }
+          ls -lh "$FILENAME"
+
+      - name: Add the episode to the feed
+        env:
+          FILENAME: ${{ inputs.filename }}
+          TITLE: ${{ inputs.title }}
+          NOTES: ${{ inputs.notes }}
+          EPNUM: ${{ inputs.episode_number }}
+          PUBDATE: ${{ inputs.publish_date }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$NOTES" > .notes_tmp.txt
+          ARGS=("$FILENAME" --title "$TITLE" --notes-file .notes_tmp.txt --remote-name "$FILENAME")
+          if [ -n "$EPNUM" ]; then ARGS+=(--episode "$EPNUM"); fi
+          if [ -n "$PUBDATE" ]; then ARGS+=(--date "$PUBDATE"); fi
+          python3 new_episode.py "${ARGS[@]}"
+          rm -f .notes_tmp.txt "$FILENAME"
+
+      - name: Commit and push
+        env:
+          TITLE: ${{ inputs.title }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- feed.xml; then
+            echo "::error::feed.xml did not change. The episode may already be in the feed."
+            exit 1
+          fi
+          git config user.name "CDZ publisher"
+          git config user.email "actions@github.com"
+          git add feed.xml
+          git commit -m "Episode: $TITLE"
+          git push
+
+      - name: Done
+        run: echo "Published. Cloudflare Pages will redeploy in about a minute."
