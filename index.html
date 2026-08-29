@@ -126,7 +126,7 @@ fetch('feed.xml')
         `<div class="ep-meta">${[date, dur].filter(Boolean).join(' · ')}</div>` +
         `<p class="ep-notes"></p>` +
         (url ? `<audio controls preload="none" src="${url}"></audio>
-         <a class="ep-dl" href="${url}" download>Download MP3 · دانلود</a>` : '');
+         <a class="ep-dl" href="/download/${url.split('/').pop()}" download>Download MP3 · دانلود</a>` : '');
       el.querySelector('h2').textContent = get('title');
       el.querySelector('.ep-notes').textContent = get('description');
       box.appendChild(el);
