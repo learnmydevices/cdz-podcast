@@ -49,6 +49,10 @@
   .ep-meta{font-size:.82rem;color:#6d6a62;margin-bottom:12px}
   .ep-notes{font-size:.97rem;max-width:64ch;white-space:pre-line}
   .ep audio{width:100%;margin-top:16px}
+  .ep-dl{display:inline-block;margin-top:12px;padding:10px 18px;font-size:.85rem;font-weight:600;
+    text-decoration:none;border:1px solid var(--ink);border-radius:999px;transition:background .15s,color .15s}
+  .ep-dl:hover,.ep-dl:focus-visible{background:var(--ink);color:var(--bone)}
+  .ep-dl:focus-visible{outline:2px solid var(--fa);outline-offset:2px}
   .empty,.error{padding:48px 0;color:#6d6a62;font-style:italic}
 
   footer{border-top:1px solid var(--line);padding:28px 0;font-size:.82rem;color:#6d6a62}
@@ -121,7 +125,8 @@ fetch('feed.xml')
         `<h2></h2>` +
         `<div class="ep-meta">${[date, dur].filter(Boolean).join(' · ')}</div>` +
         `<p class="ep-notes"></p>` +
-        (url ? `<audio controls preload="none" src="${url}"></audio>` : '');
+        (url ? `<audio controls preload="none" src="${url}"></audio>
+         <a class="ep-dl" href="${url}" download>Download MP3 · دانلود</a>` : '');
       el.querySelector('h2').textContent = get('title');
       el.querySelector('.ep-notes').textContent = get('description');
       box.appendChild(el);
