@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Cinema-ye Do Zabaane (Bilingual Cinema)</title>
+    <link>https://SITE-URL-PLACEHOLDER</link>
+    <atom:link href="https://SITE-URL-PLACEHOLDER/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en</language>
+    <copyright>&#169; Sohrab Amidi</copyright>
+    <description>Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time. &#1605;&#1585;&#1608;&#1585; &#1705;&#1608;&#1578;&#1575;&#1607; &#1601;&#1740;&#1604;&#1605;&#8204;&#1607;&#1575; &#1576;&#1607; &#1583;&#1608; &#1586;&#1576;&#1575;&#1606; &#1575;&#1606;&#1711;&#1604;&#1740;&#1587;&#1740; &#1608; &#1601;&#1575;&#1585;&#1587;&#1740;.</description>
+    <itunes:summary>Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time.</itunes:summary>
+    <itunes:author>Sohrab Amidi</itunes:author>
+    <itunes:owner>
+      <itunes:name>Sohrab Amidi</itunes:name>
+      <itunes:email>sohrabssamedia@gmail.com</itunes:email>
+    </itunes:owner>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:image href="https://MEDIA-BASE-PLACEHOLDER/cover.jpg"/>
+    <image>
+      <url>https://MEDIA-BASE-PLACEHOLDER/cover.jpg</url>
+      <title>Cinema-ye Do Zabaane (Bilingual Cinema)</title>
+      <link>https://SITE-URL-PLACEHOLDER</link>
+    </image>
+    <itunes:category text="TV &amp; Film">
+      <itunes:category text="Film Reviews"/>
+    </itunes:category>
+    <itunes:category text="Society &amp; Culture"/>
+    <!-- EPISODES:NEWEST-FIRST -->
+  </channel>
+</rss>

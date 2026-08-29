@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinema-ye Do Zabaane (Bilingual Cinema) — a film review podcast in English and Farsi</title>
+<meta name="description" content="Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time.">
+<link rel="alternate" type="application/rss+xml" title="Cinema-ye Do Zabaane" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F1EDE5;      /* screen-lit paper */
+    --ink:#191B1F;       /* projector-booth dark */
+    --en:#2C5E63;        /* English voice: cool spruce */
+    --fa:#B4681F;        /* Farsi voice: warm saffron */
+    --line:#D8D2C6;
+    --body:'Inter',system-ui,sans-serif;
+    --display:'Fraunces',Georgia,serif;
+    --farsi:'Vazirmatn','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bone);color:var(--ink);font-family:var(--body);line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+  /* Masthead: the show's idea in one device — the same title, twice,
+     English reading left-to-right and Farsi reading right-to-left,
+     meeting at one rule. */
+  header{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+  .mast-en{font-family:var(--display);font-weight:700;font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-0.01em;color:var(--en)}
+  .mast-rule{height:2px;background:linear-gradient(90deg,var(--en),var(--fa));margin:14px 0;border:0}
+  .mast-fa{font-family:var(--farsi);font-weight:600;direction:rtl;text-align:right;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--fa)}
+  .tagline{margin-top:22px;font-size:1.05rem;max-width:56ch}
+  .tagline .fa{display:block;direction:rtl;text-align:right;font-family:var(--farsi);color:#4b4a45;margin-top:6px}
+  .byline{margin-top:14px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#6d6a62}
+
+  .platforms{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .platforms a{font-size:.85rem;font-weight:600;text-decoration:none;border:1px solid var(--ink);padding:8px 14px;border-radius:999px;transition:background .15s,color .15s}
+  .platforms a:hover,.platforms a:focus-visible{background:var(--ink);color:var(--bone)}
+  .platforms a:focus-visible{outline:2px solid var(--fa);outline-offset:2px}
+  .platforms a.pending{display:none}
+
+  main{padding:40px 0 80px}
+  .ep{padding:30px 0;border-bottom:1px solid var(--line)}
+  .ep-num{font-family:var(--display);font-weight:500;color:var(--fa);font-size:.95rem}
+  .ep h2{font-family:var(--display);font-weight:700;font-size:1.45rem;margin:4px 0 8px;line-height:1.25}
+  .ep-meta{font-size:.82rem;color:#6d6a62;margin-bottom:12px}
+  .ep-notes{font-size:.97rem;max-width:64ch;white-space:pre-line}
+  .ep audio{width:100%;margin-top:16px}
+  .empty,.error{padding:48px 0;color:#6d6a62;font-style:italic}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;font-size:.82rem;color:#6d6a62}
+  footer a{color:var(--en)}
+  @media (prefers-reduced-motion:no-preference){
+    .ep{animation:rise .4s ease both}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="mast-en">Cinema-ye Do Zabaane</div>
+    <hr class="mast-rule">
+    <div class="mast-fa">سینمای دو زبانه</div>
+    <p class="tagline">Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time.
+      <span class="fa">مرور کوتاه فیلم‌ها به دو زبان انگلیسی و فارسی.</span>
+    </p>
+    <p class="byline">Hosted by Sohrab Amidi</p>
+    <nav class="platforms" aria-label="Listen on">
+      <!-- After each directory approves the show, paste its public URL and
+           remove the 'pending' class to reveal the badge. -->
+      <a class="pending" data-platform="apple" href="#">Apple Podcasts</a>
+      <a class="pending" data-platform="spotify" href="#">Spotify</a>
+      <a class="pending" data-platform="youtube" href="#">YouTube</a>
+      <a class="pending" data-platform="amazon" href="#">Amazon / Audible</a>
+      <a href="/feed.xml">RSS</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap" id="episodes">
+    <p class="empty">Loading episodes…</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Sohrab Amidi · Cinema-ye Do Zabaane (Bilingual Cinema) · <a href="/feed.xml">Subscribe by RSS</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+fetch('feed.xml')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(text => {
+    const xml = new DOMParser().parseFromString(text, 'text/xml');
+    const items = [...xml.querySelectorAll('item')];
+    const box = document.getElementById('episodes');
+    if (!items.length) {
+      box.innerHTML = '<p class="empty">First episode coming soon. صبر کنید…</p>';
+      return;
+    }
+    box.innerHTML = '';
+    for (const it of items) {
+      const get = tag => (it.getElementsByTagName(tag)[0]?.textContent || '').trim();
+      const epNum = it.getElementsByTagName('itunes:episode')[0]?.textContent;
+      const dur = it.getElementsByTagName('itunes:duration')[0]?.textContent;
+      const url = it.querySelector('enclosure')?.getAttribute('url') || '';
+      const date = get('pubDate') ? new Date(get('pubDate')).toLocaleDateString('en-US',
+                     {year:'numeric', month:'long', day:'numeric'}) : '';
+      const el = document.createElement('article');
+      el.className = 'ep';
+      el.innerHTML =
+        (epNum ? `<div class="ep-num">Episode ${epNum} · قسمت ${epNum}</div>` : '') +
+        `<h2></h2>` +
+        `<div class="ep-meta">${[date, dur].filter(Boolean).join(' · ')}</div>` +
+        `<p class="ep-notes"></p>` +
+        (url ? `<audio controls preload="none" src="${url}"></audio>` : '');
+      el.querySelector('h2').textContent = get('title');
+      el.querySelector('.ep-notes').textContent = get('description');
+      box.appendChild(el);
+    }
+  })
+  .catch(() => {
+    document.getElementById('episodes').innerHTML =
+      '<p class="error">Could not load the episode list. The feed is still available at <a href="/feed.xml">/feed.xml</a>.</p>';
+  });
+</script>
+</body>
+</html>
