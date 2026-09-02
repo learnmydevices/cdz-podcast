@@ -8,13 +8,16 @@
 <link rel="alternate" type="application/rss+xml" title="Cinema-ye Do Zabaane" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600&family=Vazirmatn:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600&family=Vazirmatn:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600&family=Vazirmatn:wght@400;600&display=swap"></noscript>
 <style>
   :root{
     --bone:#F1EDE5;      /* screen-lit paper */
     --ink:#191B1F;       /* projector-booth dark */
     --en:#2C5E63;        /* English voice: cool spruce */
-    --fa:#B4681F;        /* Farsi voice: warm saffron */
+    --fa:#9A5716;        /* Farsi voice: warm saffron */
+    --fa-deep:#7E4610;   /* darker saffron for small text (contrast) */
     --line:#D8D2C6;
     --body:'Inter',system-ui,sans-serif;
     --display:'Fraunces',Georgia,serif;
@@ -34,7 +37,7 @@
   .mast-fa{font-family:var(--farsi);font-weight:600;direction:rtl;text-align:right;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--fa)}
   .tagline{margin-top:22px;font-size:1.05rem;max-width:56ch}
   .tagline .fa{display:block;direction:rtl;text-align:right;font-family:var(--farsi);color:#4b4a45;margin-top:6px}
-  .byline{margin-top:14px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#6d6a62}
+  .byline{margin-top:14px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#5F5C55}
 
   .platforms{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
   .platforms a{font-size:.85rem;font-weight:600;text-decoration:none;border:1px solid var(--ink);padding:8px 14px;border-radius:999px;transition:background .15s,color .15s}
@@ -44,18 +47,18 @@
 
   main{padding:40px 0 80px}
   .ep{padding:30px 0;border-bottom:1px solid var(--line)}
-  .ep-num{font-family:var(--display);font-weight:500;color:var(--fa);font-size:.95rem}
+  .ep-num{font-family:var(--display);font-weight:700;color:var(--fa-deep);font-size:.95rem}
   .ep h2{font-family:var(--display);font-weight:700;font-size:1.45rem;margin:4px 0 8px;line-height:1.25}
-  .ep-meta{font-size:.82rem;color:#6d6a62;margin-bottom:12px}
+  .ep-meta{font-size:.82rem;color:#5F5C55;margin-bottom:12px}
   .ep-notes{font-size:.97rem;max-width:64ch;white-space:pre-line}
   .ep audio{width:100%;margin-top:16px}
   .ep-dl{display:inline-block;margin-top:12px;padding:10px 18px;font-size:.85rem;font-weight:600;
     text-decoration:none;border:1px solid var(--ink);border-radius:999px;transition:background .15s,color .15s}
   .ep-dl:hover,.ep-dl:focus-visible{background:var(--ink);color:var(--bone)}
   .ep-dl:focus-visible{outline:2px solid var(--fa);outline-offset:2px}
-  .empty,.error{padding:48px 0;color:#6d6a62;font-style:italic}
+  .empty,.error{padding:48px 0;color:#5F5C55;font-style:italic}
 
-  footer{border-top:1px solid var(--line);padding:28px 0;font-size:.82rem;color:#6d6a62}
+  footer{border-top:1px solid var(--line);padding:28px 0;font-size:.82rem;color:#5F5C55;min-height:96px}
   footer a{color:var(--en)}
   @media (prefers-reduced-motion:no-preference){
     .ep{animation:rise .4s ease both}
