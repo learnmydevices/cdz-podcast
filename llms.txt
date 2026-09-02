@@ -1,0 +1,17 @@
+# Cinema-ye Do Zabaane (Bilingual Cinema)
+
+> Short, simple movie reviews in two languages: first in English, then in Farsi. One film at a time. Hosted by Sohrab Amidi.
+
+A solo podcast reviewing one film per episode, delivered first in English and then in Farsi, for English and Persian speakers alike.
+
+## Listen
+
+- [Show homepage](https://cdz-podcast.pages.dev/): episode list with players and downloads
+- [RSS feed](https://cdz-podcast.pages.dev/feed.xml): the podcast feed read by Apple Podcasts, Spotify, and other apps
+
+## About
+
+- Host: Sohrab Amidi
+- Languages: English and Persian (Farsi)
+- Format: short single-film reviews, one film per episode
+- Contact: sohrabssamedia@gmail.com
